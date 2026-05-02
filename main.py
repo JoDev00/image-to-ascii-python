@@ -5,9 +5,8 @@ from PIL import Image
 
 ASCII_BRIGHTNESS_VALUES = "@@#S%?*+;:,"
 
-WIDTH, HEIGHT = int(sys.argv[2]), int(sys.argv[3])
-
-img = Image.open(f"images/{sys.argv[1]}").resize((WIDTH, HEIGHT)).convert("RGBA")
+IMAGE_NAME, WIDTH, HEIGHT = sys.argv[1], int(sys.argv[2]), int(sys.argv[3])
+img = Image.open(f"images/{IMAGE_NAME}").resize((WIDTH, HEIGHT)).convert("RGBA")
 
 def get_ascii_character(avg, alpha):
     if alpha == 0: return ' '
