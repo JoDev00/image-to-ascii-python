@@ -5,8 +5,9 @@ from PIL import Image
 
 ASCII_BRIGHTNESS_VALUES = "@@#S%?*+;:,"
 
-img = Image.open(f"images/{sys.argv[1]}")
-width, height = img.size
+WIDTH, HEIGHT = int(sys.argv[2]), int(sys.argv[3])
+
+img = Image.open(f"images/{sys.argv[1]}").resize((WIDTH, HEIGHT))
 
 def get_ascii_character(avg, alpha):
     if alpha == 0: return ' '
@@ -16,10 +17,10 @@ def get_ascii_character(avg, alpha):
     return ASCII_BRIGHTNESS_VALUES[index]
 
 def main():
-    for y in range(height):
-        for x in range(width):
+    for y in range(HEIGHT):
+        for x in range(WIDTH):
             rgb_value = img.getpixel((x, y))
-            avg = (rgb_value[0] + rgb_value[1] + rgb_value[2]) / 3
+            avg = sum(rgb_value[0:3]) / 3
             char = get_ascii_character(avg, 255)
 
             if x == 0:
