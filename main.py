@@ -7,7 +7,7 @@ ASCII_BRIGHTNESS_VALUES = "@@#S%?*+;:,"
 
 WIDTH, HEIGHT = int(sys.argv[2]), int(sys.argv[3])
 
-img = Image.open(f"images/{sys.argv[1]}").resize((WIDTH, HEIGHT))
+img = Image.open(f"images/{sys.argv[1]}").resize((WIDTH, HEIGHT)).convert("RGBA")
 
 def get_ascii_character(avg, alpha):
     if alpha == 0: return ' '
@@ -19,9 +19,9 @@ def get_ascii_character(avg, alpha):
 def main():
     for y in range(HEIGHT):
         for x in range(WIDTH):
-            rgb_value = img.getpixel((x, y))
-            avg = sum(rgb_value[0:3]) / 3
-            char = get_ascii_character(avg, 255)
+            r, g, b, a = img.getpixel((x, y))
+            avg = sum([r, g, b]) / 3
+            char = get_ascii_character(avg, a)
 
             if x == 0:
                 print()
