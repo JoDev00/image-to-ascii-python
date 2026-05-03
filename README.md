@@ -1,4 +1,4 @@
-# Image-to-Ascii
+# Image-to-Ascii Python
 
 This is a simple Python program that converts an image to ASCII format.
 
